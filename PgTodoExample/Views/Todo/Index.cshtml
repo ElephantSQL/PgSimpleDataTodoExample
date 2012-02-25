@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Todos";
+}
+<h1>
+    Todo</h1>
+@if (TempData["Notice"] != null)
+{ <div class="alert">@TempData["Notice"]</div> }
+@if (TempData["Error"] != null)
+{ <div class="alert alert-error">@TempData["Error"]</div> }
+@using (Html.BeginForm("Create", "Todo"))
+{
+    <div class="well">
+        @Html.TextBox("text", null, new { placeholder = "Todo item" })
+        <input type="submit" value="Add" class="btn btn-primary" />
+    </div>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Text
+            </th>
+            <th>
+                Done?
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var todo in ViewBag.Todos)
+        { 
+            <tr>
+                <td>
+                    @todo.text
+                </td>
+                <td>
+                    @using (Html.BeginForm("Edit", "Todo", FormMethod.Post, new { style = "display: inline" }))
+                    {
+                        @Html.Hidden("id", (int)todo.id)
+                        @Html.CheckBox("done", (bool)todo.done)
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Todo", FormMethod.Post, new { style = "display: inline" }))
+                    {
+                        @Html.Hidden("id", (int)todo.id)
+                        <input type="submit" value="Delete" class="btn btn-danger btn-small" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(function () {
+        $("input[name='done']").change(function () { $(this).parents("form").submit() })
+    })
+</script>
