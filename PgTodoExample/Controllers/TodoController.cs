@@ -13,7 +13,12 @@ namespace PgTodoExample.Controllers
         readonly dynamic db;
         public TodoController()
         {
-            var connStr = ConfigurationManager.AppSettings["CLOUDPOSTGRES_URL"] ?? "Server=127.0.0.1;Port=5432;Database=pgexample;User Id=todo;Password=4rfvbgt5;";
+            var uriString = ConfigurationManager.AppSettings["CLOUDPOSTGRES_URL"];
+            var uri = new Uri(uriString);
+            var db = uri.AbsolutePath.Trim('/');
+            var user = uri.UserInfo.Split(':')[0];
+            var passwd = uri.UserInfo.Split(':')[1];
+            var connStr = string.Format("Server={0};Database={1};User Id={2};Password={3}", uri.Host, db, user, passwd);
             this.db = Database.OpenConnection(connStr);
         }
 
