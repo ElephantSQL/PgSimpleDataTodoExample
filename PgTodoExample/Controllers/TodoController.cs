@@ -13,7 +13,7 @@ namespace PgTodoExample.Controllers
         readonly dynamic db;
         public TodoController()
         {
-            var uriString = ConfigurationManager.AppSettings["CLOUDPOSTGRES_URL"];
+            var uriString = ConfigurationManager.AppSettings["CLOUDPOSTGRES_URL"] ?? ConfigurationManager.AppSettings["LOCAL_URL"];
             var uri = new Uri(uriString);
             var db = uri.AbsolutePath.Trim('/');
             var user = uri.UserInfo.Split(':')[0];
