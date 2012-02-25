@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Simple.Data;
+using System.Configuration;
 
 namespace PgTodoExample.Controllers
 {
@@ -12,7 +13,8 @@ namespace PgTodoExample.Controllers
         readonly dynamic db;
         public TodoController()
         {
-            this.db = Database.Open();
+            var connStr = ConfigurationManager.AppSettings["CLOUDPOSTGRES_URL"] ?? "Server=127.0.0.1;Port=5432;Database=pgexample;User Id=todo;Password=4rfvbgt5;";
+            this.db = Database.OpenConnection(connStr);
         }
 
         public ActionResult Index()
