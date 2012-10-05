@@ -1,5 +1,9 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using System.Reflection;
+using System.Configuration;
+using System;
+using Simple.Data;
 
 namespace PgTodoExample
 {
@@ -27,6 +31,9 @@ namespace PgTodoExample
 
         protected void Application_Start()
         {
+            var migrator = new Migrator.Migrator("postgresql", ConnStr.Get(), Assembly.GetExecutingAssembly(), true);
+            migrator.MigrateToLastVersion();
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
