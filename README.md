@@ -1,10 +1,6 @@
-PostgreSQL Simple.Data Todo Example
-===
+# PgSimpleDataTodoExample
 
-This is an example application which shows how to use [Simple.Data](https://github.com/markrendle/Simple.Data) to connect to a [PostgreSQL server](http://www.postgresql.com/), how to migrate the database with [MigratorDotNet](http://code.google.com/p/migratordotnet/), all packaged in a small CRUD application using [Asp.Net MVC](http://www.asp.net/mvc).
+This repository is no longer in use and archived on Thu May 12 06:54:45 UTC 2022, last commit was c781558.
 
-```ConnStr``` is a small helper class to parse the [ElephantSQL](http://www.elephantsql.com) URL and generate a .NET compatible connection string from it. 
+Last working version is available in the [archive](https://github.com/ElephantSQL/PgSimpleDataTodoExample/tree/archive) branch.
 
-Migrations are run at ```application_start```.
-
-The database connection is opened in ```TodoController```. 
